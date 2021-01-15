@@ -4,18 +4,11 @@ import hashlib
 from threading import Thread
 
 
-try:
-    with open("./pswd.txt",'r') as f:
-        admin_password=f.readline().replace("\n","")
-except:
-    admin_password=-1
+with open("./pswd.txt",'r') as f: # pswd.txt should contain sha256 hash of your chosen admin password
+    admin_password=f.readline().replace("\n","")
 
 def dummy_animation():
     pass
-
-"""current_animation_function=dummy_animation
-current_animation_thread = Thread(target=current_animation_function)
-current_animation_thread.start()"""
 animation_thread=Thread(target=dummy_animation)
 animation_thread.start()
 
@@ -24,10 +17,12 @@ strip = led.setup()
 choices = led.animations
 default_choice = "set color"
 
+
 def toggle_pswd(submitted_password):
     global need_pswd, admin_password
     if submitted_password == admin_password:
         need_pswd = not need_pswd
+
 
 def get_int(num, max=255,min=0):
     try:
@@ -40,8 +35,9 @@ def get_int(num, max=255,min=0):
         else:
             return max
 
-def send_choice(rgb, choice, submitted_password, custom_func=None, custom_thread=None): # r,g,b,choice,submitted_password):
-    global strip, animation_thread, need_pswd, admin_password # ,current_animation, current_animation_function, current_animation_thread
+
+def send_choice(rgb, choice, submitted_password, custom_func=None, custom_thread=None):
+    global strip, animation_thread, need_pswd, admin_password
 
     if submitted_password == admin_password or not need_pswd:
         led.go = False
@@ -53,13 +49,9 @@ def send_choice(rgb, choice, submitted_password, custom_func=None, custom_thread
         elif choice == "custom" and custom_thread:
             animation_thread = custom_thread
         else:
-            animation_thread = Thread(target=choices[choice], args=(strip,rgb)) # if choice in choices.keys() else choices["set color"]
-
-        """def current_animation_function():
-            current_animation(strip,rgb)
-        current_animation_thread = Thread(target=current_animation_function)
-        current_animation_thread.start()"""
+            animation_thread = Thread(target=choices[choice], args=(strip,rgb))
         animation_thread.start()
+
 
 def main(req):
     global default_choice
