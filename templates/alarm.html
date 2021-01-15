@@ -1,0 +1,69 @@
+<html>
+<head>
+<meta name=viewport content='width=200'>
+<style>
+    body {
+        color:#bbbbbb;
+        background-color:#202025;
+    }
+    input {
+        max-width:100%
+        color:#bbbbbb;
+        background-color:#101013;
+        border-color:#808080;
+    }
+    button {
+        color:#bbbbbb;
+        background-color: #202020;
+        border-color: #808080;
+    }
+    select {
+        color:#bbbbbb;
+        background-color: #101013;
+        border-color: #808080;
+    }
+
+    @media screen and (max-width: 500px) {
+        /* applies only if the screen is narrower than 500px */
+        body {
+            font-size: 8px;
+        }
+    }
+
+</style>
+</head>
+
+<body style='word-wrap:break-word'>
+    choose a time to wake up at
+<hr/>
+<body>
+    next alarm: {{next_alarm[0]}}:{{next_alarm[1]}}
+</body>
+<form action="/alarm" method="POST">
+
+    <table>
+        <tr>
+            <td>
+                <label>hour</label>
+                <br/>
+                <label>minute</label>
+                <br/>
+                <label>password</label>
+            </td>
+            <td>&nbsp;</td>
+            <td>
+                <input class="form-control" type="tel" name="hour">
+                <br/>
+                <input class="form-control" type="tel" name="minute">
+                <br/>
+                <input class="form-control" type="password" name="password">
+            </td>
+        </tr>
+    </table>
+
+    <button type="submit" class="btn btn-primary">submit</button>
+
+</form>
+
+</body>
+</html>

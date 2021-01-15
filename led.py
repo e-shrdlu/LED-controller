@@ -327,6 +327,9 @@ def demo(strip):
 """#pre made animations"""
 """# '_a' means its a pre-set animation, so as to not interfere with other functions"""
 
+def wipe_a(strip,rgb,iterations=0):
+    wipe(strip, Color(rgb[0],rgb[1],rgb[2]), 0, 1)
+
 def color_wave_t_a(strip,rgb,iterations = 0):
     color_wave(strip, ((0,161,232),(255,161,232),(255,255,255),(255,161,232),(0,161,232)), 0.2, iterations, 1)
 
