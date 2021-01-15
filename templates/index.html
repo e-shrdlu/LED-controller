@@ -28,6 +28,9 @@
         body {
             font-size: 8px;
         }
+        input {
+            max-width:75%;
+        }
     }
 
 </style>
@@ -54,14 +57,14 @@
             </td>
             <td>&nbsp;</td>
             <td>
-                <input class="form-control" type="tel" name="red" style="color: #da3333">
+                <input type="tel" name="red" style="color: #da3333">
                 <br/>
-                <input class="form-control" type="tel" name="green" style="color: #33da33">
+                <input type="tel" name="green" style="color: #33da33">
                 <br/>
-                <input class="form-control" type="tel" name="blue" style="color: #3333da">
+                <input type="tel" name="blue" style="color: #3333da">
                 <br/>
                 <br/>
-                <input class="form-control" type="tel" name="rainbow_val" style="color:#dadada">
+                <input type="tel" name="rainbow_val" style="color:#dadada">
             </td>
         </tr>
     </table>
@@ -73,7 +76,7 @@
     {% if password_needed %}
     <div class="form-group">
         <label>password</label>
-        <input class="form-control" type="password" name="password">
+        <input type="password" name="password">
     </div>
     {% endif %}
     <button type="submit" class="btn btn-primary">submit</button>
@@ -94,7 +97,7 @@
         {% else %}
         <label>turn on </label>
         {% endif %}
-        <input class="form-control" type="password" name="password">
+        <input type="password" name="password">
     </div>
 
     <button type="submit" class="btn btn-primary">submit</button>

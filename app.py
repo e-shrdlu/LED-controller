@@ -1,7 +1,7 @@
 # scp *.py pi@192.168.0.8:/home/pi/Desktop/webserver
 
 # ipconfig && D: && cd D:\Coding\allpython\0raspiLED\LED_project\LED-controller && py -m http.server
-# ssh pi@192.168.0.8 "curl 192.168.0.198:8000/app.py > ~/Desktop/webserver/app.py && curl 192.168.0.198:8000/templates/index.html > ~/Desktop/webserver/templates/index.html && curl 192.168.0.198:8000/led.py > ~/Desktop/webserver/led.py && curl 192.168.0.198:8000/pswd.txt > ~/Desktop/webserver/pswd.txt && curl 192.168.0.198:8000/led_change_handler.py > ~/Desktop/webserver/led_change_handler.py && curl 192.168.0.198:8000/pswd.txt > ~/Desktop/webserver/pswd.txt && curl 192.168.0.198:8000/alarm_handler.py > ~/Desktop/webserver/alarm_handler.py && sudo python3 ~/Desktop/webserver/app.py"
+# ssh pi@192.168.0.8 "curl 192.168.0.198:8000/app.py > ~/Desktop/webserver/app.py && curl 192.168.0.198:8000/templates/index.html > ~/Desktop/webserver/templates/index.html && curl 192.168.0.198:8000/led.py > ~/Desktop/webserver/led.py && curl 192.168.0.198:8000/pswd.txt > ~/Desktop/webserver/pswd.txt && curl 192.168.0.198:8000/led_change_handler.py > ~/Desktop/webserver/led_change_handler.py && curl 192.168.0.198:8000/alarm_handler.py > ~/Desktop/webserver/alarm_handler.py && curl 192.168.0.198:8000/templates/alarm.html > ~/Desktop/webserver/templates/alarm.html && sudo python3 ~/Desktop/webserver/app.py"
 # ssh pi@192.168.0.8 "curl 192.168.0.198:8000/led.py > ~/Desktop/webserver/led.py && sudo reboot python3 ~/Desktop/webserver/app.py"
 
 # curl -X POST -F red=12 -F green=33 -F blue=2 -F rainbow_val= -F choice="set color" http://192.168.0.8

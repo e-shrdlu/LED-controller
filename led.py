@@ -462,8 +462,13 @@ def also_no_a(strip,rgb,iterations=0):
 def really_just_dont_a(strip,rgb,iterations=0):
     no(strip,iterations,delay=0)
 
+def reset_a(strip,rgb,iterations=0):
+    global go
+    clear(strip)
+    go=False
 
-animations = {"set color":set_color_a, "bounce":bounce_a, "negative bounce":negative_bounce_a, "rainbow bounce":rainbow_bounce_a, "negative rainbow bounce":negative_rainbow_bounce_a, "rainbow wipe":rainbow_wipe_a, "rainbow swipe":rainbow_swipe_a, "flowing rainbow":rainbow_a, "rainbow fade":rainbow_fade_a, "static rainbow":static_rainbow_a, "random flash":random_flash_a, "random flash rgb only":random_flash_rgb_only_a, "theatre lights":theatre_lights_a, "rainbow theatre lights":rainbow_theatre_lights_a, "alarm":alarm_a, "no":no_a, "also no":also_no_a, "really, just dont":really_just_dont_a, "cycle all functions":cycle_all_a, "demo":demo_a, "clear":clear_a} #  not in rn: "warm color wave":warm_color_wave_a, "cool color wave":cool_color_wave_a,
+
+animations = {"set color":set_color_a, "bounce":bounce_a, "negative bounce":negative_bounce_a, "rainbow bounce":rainbow_bounce_a, "negative rainbow bounce":negative_rainbow_bounce_a, "rainbow wipe":rainbow_wipe_a, "rainbow swipe":rainbow_swipe_a, "flowing rainbow":rainbow_a, "rainbow fade":rainbow_fade_a, "static rainbow":static_rainbow_a, "random flash":random_flash_a, "random flash rgb only":random_flash_rgb_only_a, "theatre lights":theatre_lights_a, "rainbow theatre lights":rainbow_theatre_lights_a, "alarm":alarm_a, "no":no_a, "also no":also_no_a, "really, just dont":really_just_dont_a, "cycle all functions":cycle_all_a, "demo":demo_a, "reset":reset_a, "clear":clear_a} #  not in rn: "warm color wave":warm_color_wave_a, "cool color wave":cool_color_wave_a,
     #randomized(strip,100,True)
 if __name__ == "__main__":
     """setup"""
