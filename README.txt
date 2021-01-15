@@ -7,4 +7,4 @@ flask, waitress, rpi_ws281x
 
 a lot of this was written by copying some example code and modifying/expanding on it, and as such there may be things that there doesn't appear to be any reason for because they got copied over and I didn't understand them so I left them in.
 
-I don't know what else a readme is supposed to have
+what am I supposed to put in a readme
