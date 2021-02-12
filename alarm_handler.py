@@ -33,5 +33,5 @@ def set_alarm(hour,min,pswd):
     for clr in range(3):
         led_change_handler.send_choice([(255,0,0),(0,255,0),(0,0,255)][clr], "custom", pswd, custom_func=led.wipe_a)
         led_change_handler.animation_thread.join()
-    led_change_handler.send_choice((255,255,255), "custom", pswd, custom_func=led.no_a)
+    led_change_handler.send_choice((255,255,255), "custom", pswd, custom_func=led.fast_flowing_rainbow_a)
     current_alarm = [None,None]

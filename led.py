@@ -26,14 +26,14 @@ def setup():
 def setpixel(strip,pos,color):
     strip.setPixelColor(pos,color)
 
-def wipe(strip, color, delay, speed=5, dir=1): # delay is in milliseconds
+def wipe(strip, color, delay, speed=5, dir=1):
     global go
     for i in range(0,strip.numPixels(),speed)[::dir]:
         for ii in range(speed):
             if not go: return 0
             setpixel(strip,i+ii,color)
         strip.show()
-        time.sleep(delay/1000.0)
+        time.sleep(delay)
 
 def color_swipe(strip,color,swipe_size=10,speed=1, dir=1):
     global go
@@ -210,6 +210,32 @@ def no(strip,iterations,delay):
         i+=1
 
 
+def run(strip,colors,speed,length,dist=5,dir=1,delay=0,background_color=Color(0,0,0), mirrored=1, iterations=0):
+    global go
+    i=0
+    base = []
+    for color in colors:
+        for i in range(length):
+            base.append(color)
+        for i in range(dist):
+            base.append(background_color)
+    if mirrored:
+        total_len = strip.numPixels()//2
+    else:
+        total_len = strip.numPixels()
+
+    while (i<iterations or iterations == 0) and go:
+        for offset in range(0, len(base), speed)[::dir]:
+            for pos in range(total_len):
+                pixel_to_set = pos
+                setpixel(strip, pixel_to_set, base[(pos + offset) % len(base)])
+                if mirrored:
+                    setpixel(strip, strip.numPixels() - pixel_to_set - 1, base[(pos + offset) % len(base)])
+            strip.show()
+            if not go: return 0
+            if delay: time.sleep(delay)
+        i += 1
+
 def demo(strip):
     global go
 
@@ -266,8 +292,11 @@ def wipe_a(strip,rgb,iterations=0):
 def color_wave_t_a(strip,rgb,iterations = 0):
     color_wave(strip, ((0,161,232),(255,161,232),(255,255,255),(255,161,232),(0,161,232)), 0.2, iterations, 1)
 
-def rainbow_a(strip,rgb,iterations = 0):
+def flowing_rainbow_a(strip,rgb,iterations = 0):
     perPixelRainbowColor(strip,iterations)
+
+def fast_flowing_rainbow_a(strip,rgb,iterations=0):
+    run(strip,[rainbowWheel(x) for x in range(0,765)],10,1,0,mirrored=0,iterations=iterations)
 
 def clear_a(strip,rgb,iterations = 0): # default value is 0,0,0, so will clear when button pushed.
     colorAll(strip,Color(rgb[0],rgb[1],rgb[2]))
@@ -311,7 +340,8 @@ def static_rainbow_a(strip,rgb,iterations = 0):
     scale = 765/length
     for pixel in range(length):
         setpixel(strip, pixel, rainbowWheel(int(pixel * scale)))
-    strip.show() # <--remove tab to show all at once, keep to 'wipe'
+        if pixel % 5 == 0: strip.show() # <-- comment out this line to show all @ once, keep to 'wipe'
+    strip.show()
 
 def negative_bounce_a(strip,rgb,iterations = 0):
         bounce(strip, [Color(0,0,0)], 40, 0, iterations, background_colors=[Color(rgb[0],rgb[1],rgb[2])],speed=5)
@@ -339,7 +369,7 @@ def cycle_all_a(strip,rgb,iterations = 0):
     global go, animations
     if rgb == Color(0,0,0):
         rgb == Color(255,0,0)
-    i=1 # bc it calls with iter=1, o
+    i=1 # bc this func will call iteslt with iter=1, and this way it wont exec
     while (i<iterations or iterations==0) and go:
         for func in animations.keys():
             if not go: return 0
@@ -354,10 +384,18 @@ def cycle_all_a(strip,rgb,iterations = 0):
         i+=1
 
 def theatre_lights_a(strip,rgb,iterations=0):
-    theatre_lights(strip,[Color(rgb[0],rgb[1],rgb[2])],0.5, iterations)
+    run(strip, [Color(rgb[0],rgb[1],rgb[2])], 1, 1, 2, mirrored=False, dir=1, delay=0.5, iterations=iterations)
+    # theatre_lights(strip,[Color(rgb[0],rgb[1],rgb[2])],0.5, iterations)
 
 def rainbow_theatre_lights_a(strip,rgb,iterations=0):
-    theatre_lights(strip,[rainbowWheel(i) for i in range(0,765,45)], 0.5, iterations)
+    run(strip, [rainbowWheel(x) for x in range(0,765,85)], 1, 1, 2, mirrored=False, dir=1, delay=0.5, iterations=iterations)
+    # theatre_lights(strip,[rainbowWheel(i) for i in range(0,765,45)], 0.5, iterations)
+
+def run_a(strip,rgb,iterations=0):
+    run(strip, [Color(rgb[0],rgb[1],rgb[2])], 4, 16, 24, mirrored=True, dir=-1)
+
+def rainbow_run_a(strip, rgb, iterations=0):
+    run(strip, [rainbowWheel(x) for x in range(0,765,85)], 4, 16, 24, mirrored=True, dir=-1)
 
 def no_a(strip,rgb,iterations=0):
     no(strip,iterations,delay=0.5)
@@ -373,7 +411,14 @@ def reset_a(strip,rgb,iterations=0):
     clear(strip)
     go=False
 
-animations = {"set color":set_color_a, "bounce":bounce_a, "negative bounce":negative_bounce_a, "rainbow bounce":rainbow_bounce_a, "negative rainbow bounce":negative_rainbow_bounce_a, "rainbow wipe":rainbow_wipe_a, "rainbow swipe":rainbow_swipe_a, "flowing rainbow":rainbow_a, "rainbow fade":rainbow_fade_a, "static rainbow":static_rainbow_a, "random flash":random_flash_a, "random flash rgb only":random_flash_rgb_only_a, "theatre lights":theatre_lights_a, "rainbow theatre lights":rainbow_theatre_lights_a, "alarm":alarm_a, "no":no_a, "also no":also_no_a, "really, just dont":really_just_dont_a, "cycle all functions":cycle_all_a, "demo":demo_a, "reset":reset_a, "clear":clear_a}
+animations = {"set color":set_color_a, "bounce":bounce_a, "negative bounce":negative_bounce_a, "rainbow bounce":rainbow_bounce_a, "negative rainbow bounce":negative_rainbow_bounce_a, "rainbow wipe":rainbow_wipe_a, "rainbow swipe":rainbow_swipe_a, "flowing rainbow":flowing_rainbow_a, "fast flowing rainbow":fast_flowing_rainbow_a, "rainbow fade":rainbow_fade_a, "static rainbow":static_rainbow_a, "random flash":random_flash_a, "random flash rgb only":random_flash_rgb_only_a, "theatre lights":theatre_lights_a, "rainbow theatre lights":rainbow_theatre_lights_a, "run":run_a, "rainbow run":rainbow_run_a, "alarm":alarm_a, "no":no_a, "also no":also_no_a, "really, just dont":really_just_dont_a, "cycle all functions":cycle_all_a, "demo":demo_a, "reset":reset_a, "clear":clear_a}
+
+
+"""working, but unused because it might clutter up the menu. (maybe I could have an 'advanced' section?)"""
+
+
+def mirrored_fast_rainbow_a(strip):
+    run(setup(),[rainbowWheel(x) for x in range(0,765)],10,1,0, mirrored=True, dir=-1)
 
 
 if __name__ == "__main__":
@@ -385,9 +430,30 @@ if __name__ == "__main__":
     clear(strip)
 
 
+"""obsolete"""
 
+def rainbow_theatre_lights_a(strip,rgb,iterations=0):
+    theatre_lights(strip,[rainbowWheel(i) for i in range(0,765,45)], 0.5, iterations)
+
+def theatre_lights_a(strip,rgb,iterations=0):
+    theatre_lights(strip,[Color(rgb[0],rgb[1],rgb[2])],0.5, iterations)
 
 """ works in progress """
+
+def run_first_try(strip,colors,speed,delay,length,dir=1,background_color=Color(0,0,0), iterations=0):
+    global go
+    i=0
+    while (i<iterations or iterations == 0) and go:
+        for ii in range(0,length,speed)[::dir]:
+            if not go: return 0
+            for pixel in range(strip.numPixels()):
+                if pixel % length == ii:
+                    setpixel(strip,pixel,colors[(pixel-(ii+(length*i)))%len(colors)])
+                else:
+                    setpixel(strip,pixel,background_color)
+            strip.show()
+            time.sleep(delay)
+        i += 1
 
 def warm_color_wave_a(strip,rgb,iterations = 0):
     """not currently in use"""

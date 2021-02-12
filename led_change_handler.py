@@ -4,7 +4,7 @@ import hashlib
 from threading import Thread
 
 
-with open("./pswd.txt",'r') as f: # pswd.txt should contain sha256 hash of your chosen admin password
+with open("/home/pi/Desktop/webserver/pswd.txt",'r') as f: # pswd.txt should contain sha256 hash of your chosen admin password
     admin_password=f.readline().replace("\n","")
 
 def dummy_animation():
