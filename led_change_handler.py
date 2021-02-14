@@ -56,6 +56,9 @@ def send_choice(rgb, choice, submitted_password, custom_func=None, custom_thread
 def main(req):
     global default_choice
 
+    if "delay" in req.keys():
+        time.sleep(int(req["delay"]))
+
     if "password" in req.keys():
         req["password"] = hashlib.sha256(req.get("password").encode()).hexdigest()
 
