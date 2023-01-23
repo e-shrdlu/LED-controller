@@ -1,5 +1,5 @@
 # LED-controller
-runs a local webserver on a raspberry pi that can control LED lights
+Flask webpage on Raspberry Pi controls neopixel LED lights to display custom patterns and animations
 
 ## demonstration
 [partially complete](https://youtu.be/AsqQsX_ci0I)\
