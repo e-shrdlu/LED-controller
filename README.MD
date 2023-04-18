@@ -2,8 +2,20 @@
 Flask webpage on Raspberry Pi controls neopixel LED lights to display custom patterns and animations
 
 ## demonstration
-[partially complete](https://youtu.be/AsqQsX_ci0I)\
-[in development](https://youtu.be/sTNwZXZ2_zA)
+
+### Partially Complete
+
+https://user-images.githubusercontent.com/50746727/232639897-3db1237c-4763-4577-adc2-e67364af80c7.mp4
+
+
+### In Development
+
+
+
+https://user-images.githubusercontent.com/50746727/232640868-0c700c0a-fdbd-4289-a343-6a75d977c595.mp4
+
+
+
 
 ## more technical explaination
 this code runs a webpage with flask/waitress for controlling neopixel (WS2812) led strips plugged into a Raspberry Pi Zero
